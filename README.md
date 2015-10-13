@@ -12,6 +12,26 @@ Installation
 Copy the the folder silhouette and the two files sendto_silhouette.inx and 
 sendto_silhouette.py to your computer:
 
+Kubuntu 15.04:
+* sudo apt-get install libusb-1.0-0-dev python-pip
+* sudo pip install --pre pyusb
+* sudo mkdir CAMEO
+* cd CAMEO
+* git clone https://github.com/fablabnbg/inkscape-silhouette.git
+* cd inkscape-silhouette
+* sudo python setup.py build
+* sudo python setup.py install
+* sudo cp sendto_silhouette.* /usr/share/inkscape/extensions/
+* sudo cp -R silhouette /usr/share/inkscape/extensions/
+* sudo nano /etc/udev/rules.d/99-graphtec-silhouette.rules
+* You need to add the following (make sure you have the same idVendor-0b4d- idProduct-112b- as appers in 'lsusb'):
+   - UBSYSTEM=="usb", ATTR{idVendor}=="0b4d", ATTR{idProduct}=="112b", MODE="666"
+* Add your user to 'lp' group:
+   - sudo adduser $USER lp
+* restart inkscape to find the app under:
+   - Extentions > Export > Sent to Silhouette ... 
+tested on Oct 14, 2015 by @akaifi
+
 openSUSE:
 * An automatic build hook updates the rpm package at https://build.opensuse.org/package/show/home:jnweiger:fablabnbg/inkscape-silhouette
 
